@@ -2,7 +2,7 @@
  *  Compilation:  javac GenomeCompressor.java
  *  Execution:    java GenomeCompressor - < input.txt   (compress)
  *  Execution:    java GenomeCompressor + < input.txt   (expand)
- *  Dependencies: BinaryIn.java BinaryOut.java
+ *  Dependencies: BinaryIn.java BinaryOut.java <
  *  Data files:   genomeTest.txt
  *                virus.txt
  *
@@ -24,9 +24,19 @@ public class GenomeCompressor {
      * { A, C, T, G } from standard input; compresses and writes the results to standard output.
      */
     public static void compress() {
-
         // TODO: complete the compress() method
 
+//        int[] keys = new int[256];
+//        keys['A'] = 0;
+//        keys['C'] = 1;
+//        keys['G'] = 2;
+//        keys['T'] = 3;
+
+        String data = BinaryStdIn.readString();
+
+        for(int i = 0; i < data.length(); i++){
+            BinaryStdOut.write(data.charAt(i), 7);
+        }
         BinaryStdOut.close();
     }
 
@@ -34,9 +44,11 @@ public class GenomeCompressor {
      * Reads a binary sequence from standard input; expands and writes the results to standard output.
      */
     public static void expand() {
-
         // TODO: complete the expand() method
-
+        while (!BinaryStdIn.isEmpty()) {
+            char c = BinaryStdIn.readChar(7);
+            BinaryStdOut.write(c);
+        }
         BinaryStdOut.close();
     }
 
@@ -48,8 +60,7 @@ public class GenomeCompressor {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-
-        if      (args[0].equals("-")) compress();
+        if (args[0].equals("-")) compress();
         else if (args[0].equals("+")) expand();
         else throw new IllegalArgumentException("Illegal command line argument");
     }
