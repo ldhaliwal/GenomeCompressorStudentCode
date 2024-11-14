@@ -24,8 +24,6 @@ public class GenomeCompressor {
      * { A, C, T, G } from standard input; compresses and writes the results to standard output.
      */
     public static void compress() {
-        // TODO: complete the compress() method
-
         int[] keys = new int[256];
         keys['A'] = 0;
         keys['C'] = 1;
@@ -33,6 +31,8 @@ public class GenomeCompressor {
         keys['T'] = 3;
 
         String data = BinaryStdIn.readString();
+
+        BinaryStdOut.write(data.length());
 
         for(int i = 0; i < data.length(); i++){
             BinaryStdOut.write(keys[data.charAt(i)], 2);
@@ -50,10 +50,13 @@ public class GenomeCompressor {
         codes[2] = 'G';
         codes[3] = 'T';
 
-        while (!BinaryStdIn.isEmpty() && !BinaryStdIn.readBoolean()) {
+        int numCharacters = BinaryStdIn.readInt();
+
+        for(int i = 0; i < numCharacters; i++){
             int num = BinaryStdIn.readInt(2);
             BinaryStdOut.write(codes[num]);
         }
+
         BinaryStdOut.close();
     }
 
